@@ -1,0 +1,140 @@
+algorithms for the tasks 
+ Print Hello world and a seconds timer in LCD 16x2 I2C using tinkerCAD. Also give a detailed algorithm for the same. 
+1.Initialize Libraries and LCD Display
+2.Declare and Initialize Variables
+3.Setup Function
+4.Loop Function
+flowchart for the same 
+START
+  |
+  v
+[Include Libraries & Declare Variables]
+  |
+  v
+[Setup Function]
+  |
+  |--> Initialize LCD (16x2)
+  |--> Set LED_BUILTIN as OUTPUT
+  |--> Print "hello world" on LCD
+  |--> Turn on LCD Backlight
+  |
+  v
+[Loop Begins]
+  |
+  v
+[Get currentMillis = millis()]
+  |
+  v
+[Is (currentMillis - previousMillis) >= 1000 ms?]
+  |               \
+  |                \
+  |                 No --> Skip LCD update
+  |
+ Yes
+  |
+  v
+[Update previousMillis = currentMillis]
+  |
+  v
+[Increment seconds]
+  |
+  v
+[Clear LCD]
+  |
+  v
+[Print "Seconds: <value>" on LCD]
+  |
+  v
+[Blink LED]
+  |
+  |--> Turn LED ON
+  |--> Delay 500 ms
+  |--> Turn LED OFF
+  |--> Delay 500 ms
+  |
+  v
+[GOTO Loop]
+
+
+
+
+algorithm for the 2nd task 
+Increase and decrease the brightness of an LED using potentiometer and Arduino using tinkerCAD. Also give a detailed algorithm for the same. 
+1.Define Constants
+2.Setup Function
+3.Loop Function
+4.Repeat the loop continuously to update brightness in real-time
+
+flowchart for the same 
+START
+  |
+  v
+[Define LED_PIN = 9 and POT_PIN = A0]
+  |
+  v
+[Setup Function]
+  |
+  |--> Set LED_PIN as OUTPUT
+  |
+  v
+[Loop Begins]
+  |
+  v
+[Read potValue from POT_PIN using analogRead()]
+  |
+  v
+[Map potValue (0–1023) to brightness (0–255)]
+  |
+  v
+[Write brightness to LED_PIN using analogWrite()]
+  |
+  v
+[GOTO Loop]
+
+algorithm for the 3rd task 
+RGB LED Control
+Task: Use a potentiometer to control the colour of an RGB LED.
+Components: RGB LED, resistors, potentiometers, Arduino.
+Learning Goal: Learn how to manipulate colours using PWM and multiple inputs.
+
+algorithm for the same 
+1.Define Pins
+2.Setup Function
+3.Loop Function
+4.Decide LED Color Based on Potentiometer Range
+5.Add a Short Delay (10 ms) for Stability
+6.Repeat the Loop Continuously
+flowchart for the same 
+START
+  |
+  v
+[Define Pins: redPin=9, greenPin=10, bluePin=11, potPin=A0]
+  |
+  v
+[Setup Function]
+  |
+  |--> Set redPin, greenPin, bluePin as OUTPUT
+  |
+  v
+[Loop Begins]
+  |
+  v
+[Read potValue from potPin using analogRead()]
+  |
+  v
+[Map potValue (0–1023) to brightness (0–255)]
+  |
+  v
+[Check potValue Range]
+  |  
+  |-- If potValue < 341 --> [Set Red: brightness, Green: 0, Blue: 0]
+  |
+  |-- Else If potValue < 682 --> [Set Red: 0, Green: brightness, Blue: 0]
+  |
+  |-- Else --> [Set Red: 0, Green: 0, Blue: brightness]
+  |
+  v
+[Delay 10 ms for stability]
+  |
+  v
+[GOTO Loop]
