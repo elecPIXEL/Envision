@@ -1,0 +1,106 @@
+The codes for the tasks given 
+task 1  Print Hello world and a seconds timer in LCD 16x2 I2C using tinkerCAD. Also give a detailed algorithm for the same. 
+#include <Adafruit_LiquidCrystal.h>
+
+Adafruit_LiquidCrystal lcd_1(0);
+
+unsigned long previousMillis = 0; // Store the last time the timer was updated
+const long interval = 1000; // Interval at which to update the timer (1 second)
+int seconds = 0; // Variable to store the number of seconds
+
+void setup()
+{
+  lcd_1.begin(16, 2);
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  lcd_1.print("hello world");
+  lcd_1.setBacklight(1);
+}
+
+void loop()
+{
+  // Check if a second has passed
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    // Save the last time you updated the timer
+    previousMillis = currentMillis;
+    
+    // Increment the seconds counter
+    seconds++;
+
+    // Clear the LCD and print the updated seconds
+    lcd_1.clear();
+    lcd_1.print("Seconds: ");
+    lcd_1.print(seconds);
+  }
+
+  // Blink the built-in LED
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(500); // Wait for 500 milliseconds
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(500); // Wait for 500 milliseconds
+}
+
+code for the 2nd task 
+ Increase and decrease the brightness of an LED using potentiometer and Arduino using tinkerCAD. Also give a detailed algorithm for the same
+#define LED_PIN 9      // PWM-capable pin
+#define POT_PIN A0     // Analog input
+
+void setup() {
+  pinMode(LED_PIN,OUTPUT);
+}
+
+void loop() {
+  int potValue = analogRead(POT_PIN);       // Read value from 0 to 1023
+  int brightness = map(potValue,0,1023,0,255);  // Convert to 0-255
+  analogWrite(LED_PIN,brightness);         // Set PWM duty cycle
+}
+
+code for the 3rd task 
+RGB LED Control
+Task: Use a potentiometer to control the colour of an RGB LED.
+Components: RGB LED, resistors, potentiometers, Arduino.
+Learning Goal: Learn how to manipulate colours using PWM and multiple inputs.
+
+// Pin definitions
+const int redPin = 9;
+const int greenPin = 10;
+const int bluePin = 11;
+
+// Potentiometer pin
+const int potPin = A0;
+
+int potValue;
+
+void setup() {
+  // Setting the rgb led pins as outputs
+  pinMode(redPin, OUTPUT);
+  pinMode(greenPin, OUTPUT);
+  pinMode(bluePin, OUTPUT);
+}
+
+void loop() {
+  // Read the potentiometer value (0-1023)
+  potValue = analogRead(potPin);
+
+  // Map the potentiometer value to PWM range (0-255)
+  int brightness = map(potValue, 0, 1023, 0, 255);
+
+  // vary through colors based on the potentiometer value
+  if (potValue < 341) { // Red
+    analogWrite(redPin, brightness);
+    analogWrite(greenPin, 0);
+    analogWrite(bluePin, 0);
+  } else if (potValue < 682) { // Green
+    analogWrite(redPin, 0);
+    analogWrite(greenPin, brightness);
+    analogWrite(bluePin, 0);
+  } else { // Blue
+    analogWrite(redPin, 0);
+    analogWrite(greenPin, 0);
+    analogWrite(bluePin, brightness);
+  }
+
+  // Small delay for stability
+  delay(10);
+}
